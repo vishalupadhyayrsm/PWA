@@ -1,0 +1,8 @@
+.add-button {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+.install-app-btn-container {
+  display: none;
+}

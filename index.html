@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="theme-color" content="#009578">
+ <link rel="manifest" href="manifest.json">
+ <link rel="apple-touch-icon" href="images/512.png">
+ <link rel="stylesheet" href="src/index.css">
+ <style> img {    max-width: 100%; } </style>
+</head>
+<body style="background-color:#a7414a;" ontouchstart="Full_screen()">
+    
+    
+      
+  <h3 align="center" style="color:white">Asset GeoTagging</h3>  <h4 align="center" style="color:white">by Sabre Management Solutions Private Limited</h4>
+  
+  <div style="text-align: justify;" >
+  <p style="color:white">
+      
+  This app performs photo geotagging of equipment/assets. The name and the image of the 
+  equipment/assets are captured by the mobile device and uploaded to the cloud database.
+  This app requires the browser to have camera and geolocation permission.
+  </p>
+  </div>
+
+  <br><br><button type="button" style="display:block;width:120px; height:30px;" onclick="document.getElementById('mypic').click()">Capture image</button>
+  <input type="file" id="mypic" accept="image/*" capture="camera" style="display:none">
+  <br>
+  <canvas></canvas>
+  
+  <script>
+  
+  function Full_screen() {
+  document.documentElement.requestFullscreen();
+    }
+  
+  window.scrollTo(0, 1);
+  var input = document.querySelector('input[type=file]'); 
+  input.onchange = function () {
+    var file = input.files[0];
+    upload(file);
+    drawOnCanvas(file);   
+   
+  };
+ 
+  function upload(file) {
+    var form = new FormData(),
+        xhr = new XMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+             alert( this.responseText );
+            }
+        };
+    form.append('image', file);
+    xhr.open('post', 'server.php', true);
+    xhr.send(form);
+    
+  }
+ 
+  function drawOnCanvas(file) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var dataURL = e.target.result,
+          c = document.querySelector('canvas'), 
+          ctx = c.getContext('2d'),
+          img = new Image();
+ 
+      img.onload = function() {
+        c.width = img.width/10;
+        c.height = img.height/10;
+        ctx.drawImage(img, 0, 0,c.width,c.height);
+      };
+ 
+      img.src = dataURL;
+    };
+ 
+    reader.readAsDataURL(file);
+  }
+ 
+  </script>
+<script src="src/index.js"></script>
+</body>
+</html>

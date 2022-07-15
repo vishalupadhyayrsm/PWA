@@ -1,0 +1,29 @@
+{
+    "name" :"Image Capture",
+    "short_name":"IC",
+    "start_url":"/geotag/index.html",
+    "background_color":"#3367D6",
+    "theme_color":"#3367D6",
+    "display":"standalone",
+    "icons":[
+        
+        {
+            "src":"/geotag/images/192.png",
+            "sizes":"192x192",
+            "type":"image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src":"/geotag/images/384.png",
+            "sizes":"384x384",
+            "type":"image/png",
+            "purpose": "any maskable"
+        }
+        ,{
+            "src":"/geotag/images/512.png",
+            "sizes":"512x512",
+            "type":"image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
